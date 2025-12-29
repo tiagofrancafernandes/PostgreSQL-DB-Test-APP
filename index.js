@@ -41,7 +41,7 @@ const server = http.createServer(async (req, res) => {
 
     if (url.pathname === '/count' && (req.method === 'GET' || req.method === 'POST')) {
         try {
-            let table = 'migrations';
+            let table = 'users';
 
             if (req.method === 'GET') {
                 table = url.searchParams.get('table') || table;

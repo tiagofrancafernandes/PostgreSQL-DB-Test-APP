@@ -1,28 +1,30 @@
 # PostgreSQL Count API
 
-Aplicação simples com uma rota que conta os itens de uma tabela PostgreSQL usando Drizzle ORM.
+**English** | [Português](README.pt-BR.md)
 
-## Configuração
+Simple application with a single route that counts items from a PostgreSQL table using Drizzle ORM.
 
-1. Instalar dependências:
+## Setup
+
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Configurar variáveis de ambiente:
+2. Configure environment variables:
 ```bash
 cp .env.example .env
 ```
 
-Edite o arquivo `.env` e configure a URL do banco de dados:
+Edit the `.env` file and configure the database URL:
 ```
 DATABASE_URL=postgresql://postgres:postgres@172.17.0.1:1010/postgres?sslmode=false
 PORT=3000
 ```
 
-## Criar a tabela no banco
+## Create database table
 
-Execute o seguinte SQL no seu banco PostgreSQL:
+Execute the following SQL in your PostgreSQL database:
 
 ```sql
 CREATE TABLE items (
@@ -31,24 +33,26 @@ CREATE TABLE items (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
--- Inserir alguns dados de teste
+-- Insert test data
 INSERT INTO items (name) VALUES
     ('Item 1'),
     ('Item 2'),
     ('Item 3');
 ```
 
-## Executar localmente
+## Run locally
 
 ```bash
 npm run dev
 ```
 
-A API estará disponível em `http://localhost:3000/count`
+The API will be available at `http://localhost:3000/count`
 
-## Deploy na Vercel
+The server restarts automatically when you modify files (hot reload enabled).
 
-1. Instalar Vercel CLI:
+## Deploy to Vercel
+
+1. Install Vercel CLI:
 ```bash
 npm install -g vercel
 ```
@@ -58,24 +62,84 @@ npm install -g vercel
 vercel
 ```
 
-3. Configurar variável de ambiente na Vercel:
-- Acesse o dashboard da Vercel
-- Vá em Settings > Environment Variables
-- Adicione `DATABASE_URL` com a URL do seu banco PostgreSQL
+3. Configure environment variable in Vercel:
+- Access the Vercel dashboard
+- Go to Settings > Environment Variables
+- Add `DATABASE_URL` with your PostgreSQL database URL
 
 ## Endpoints
 
 ### GET /count
 
-Retorna a contagem de itens na tabela `items`.
+Returns the count of records from a specific table.
 
-**Resposta:**
+#### Use default table (migrations):
+```bash
+curl http://localhost:3000/count
+```
+
+**Response:**
 ```json
 {
-    "count": 3
+    "count": 5,
+    "table": "migrations"
 }
+```
+
+#### Specify table via query parameter:
+```bash
+# Count records from users table
+curl http://localhost:3000/count?table=users
+
+# Count records from roles table
+curl http://localhost:3000/count?table=roles
+
+# Count records from items table
+curl http://localhost:3000/count?table=items
+```
+
+**Response:**
+```json
+{
+    "count": 10,
+    "table": "users"
+}
+```
+
+### POST /count
+
+You can also specify the table via request body:
+
+```bash
+curl -X POST http://localhost:3000/count \
+  -H "Content-Type: application/json" \
+  -d '{"table": "users"}'
+```
+
+**Response:**
+```json
+{
+    "count": 10,
+    "table": "users"
+}
+```
+
+## Usage examples
+
+```bash
+# Default table
+http://localhost:3000/count
+
+# Count users
+http://localhost:3000/count?table=users
+
+# Count roles
+http://localhost:3000/count?table=roles
+
+# Count items
+http://localhost:3000/count?table=items
 ```
 
 ## CORS
 
-CORS está habilitado para qualquer origem (`*`).
+CORS is enabled for any origin (`*`).
