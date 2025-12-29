@@ -18,7 +18,7 @@ cp .env.example .env
 
 Edit the `.env` file and configure the database URL:
 ```
-DATABASE_URL=postgresql://postgres:postgres@172.17.0.1:1010/postgres?sslmode=false
+DATABASE_URL=postgresql://postgres:postgres@172.17.0.1:1010/postgres?sslmode=disable
 PORT=3000
 ```
 

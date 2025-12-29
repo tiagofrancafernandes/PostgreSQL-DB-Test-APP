@@ -15,7 +15,7 @@ let db;
 function getDb() {
     if (!db) {
         const connectionString =
-            process.env.DATABASE_URL || 'postgresql://postgres:postgres@172.17.0.1:1010/postgres?sslmode=false';
+            process.env.DATABASE_URL || 'postgresql://postgres:postgres@172.17.0.1:1010/postgres?sslmode=disable';
         client = postgres(connectionString);
         db = drizzle(client, { schema: { items } });
     }
