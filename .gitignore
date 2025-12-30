@@ -13,3 +13,4 @@ node_modules
 *.out
 *.zip
 _ide_helper*
+session_id*
