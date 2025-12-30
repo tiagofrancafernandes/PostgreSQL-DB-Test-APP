@@ -52,6 +52,10 @@ The server restarts automatically when you modify files (hot reload enabled).
 
 ## Deploy to Vercel
 
+For detailed deployment instructions, see the [Deploy Guide](DEPLOY.md).
+
+Quick start:
+
 1. Install Vercel CLI:
 ```bash
 npm install -g vercel
@@ -62,10 +66,17 @@ npm install -g vercel
 vercel
 ```
 
-3. Configure environment variable in Vercel:
-- Access the Vercel dashboard
-- Go to Settings > Environment Variables
-- Add `DATABASE_URL` with your PostgreSQL database URL
+3. Configure environment variable:
+```bash
+vercel env add DATABASE_URL
+```
+
+4. Redeploy:
+```bash
+vercel --prod
+```
+
+See [DEPLOY.md](DEPLOY.md) for complete step-by-step instructions, troubleshooting, and best practices.
 
 ## Endpoints
 

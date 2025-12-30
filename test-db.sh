@@ -1,9 +1,10 @@
 #!/bin/bash
 
 SHOW_DATABASE_URL=$1
+ENV_FILE=${2:-.env}
 
-if [[ -f .env ]]; then
-    source .env
+if [[ -f $ENV_FILE ]]; then
+    source $ENV_FILE
 else
     exit 3
 fi

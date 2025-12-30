@@ -1,15 +1,8 @@
 {
-    "version": 2,
-    "builds": [
+    "rewrites": [
         {
-            "src": "api/**/*.js",
-            "use": "@vercel/node"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/count",
-            "dest": "/api/count.js"
+            "source": "/count",
+            "destination": "/api/count"
         }
     ]
 }

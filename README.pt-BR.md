@@ -52,6 +52,10 @@ O servidor reinicia automaticamente quando você modificar os arquivos (hot relo
 
 ## Deploy na Vercel
 
+Para instruções detalhadas de deployment, veja o [Guia de Deploy](DEPLOY.pt-BR.md).
+
+Início rápido:
+
 1. Instalar Vercel CLI:
 ```bash
 npm install -g vercel
@@ -62,10 +66,17 @@ npm install -g vercel
 vercel
 ```
 
-3. Configurar variável de ambiente na Vercel:
-- Acesse o dashboard da Vercel
-- Vá em Settings > Environment Variables
-- Adicione `DATABASE_URL` com a URL do seu banco PostgreSQL
+3. Configurar variável de ambiente:
+```bash
+vercel env add DATABASE_URL
+```
+
+4. Fazer redeploy:
+```bash
+vercel --prod
+```
+
+Veja [DEPLOY.pt-BR.md](DEPLOY.pt-BR.md) para instruções completas passo a passo, solução de problemas e melhores práticas.
 
 ## Endpoints
 
